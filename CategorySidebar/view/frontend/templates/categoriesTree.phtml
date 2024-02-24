@@ -1,0 +1,70 @@
+
+<div class="heading">
+    <h4 class="heading-category">
+        Categories
+    </h4>
+</div>
+<div id="category-accordion" class="category-according">
+    <?php echo $block->getCategoryTreeHtml($block->getCategoryCollection()); ?>
+</div>
+
+<script>
+    require(['jquery', 'jquery/ui'], function($) {
+        $(document).ready(function() {
+            $("#category-accordion ul li .touch-button").click(function(e) {
+                e.stopPropagation();
+                $(this).toggleClass('active');
+                $(this).parent('.parent-category').toggleClass('active');
+                if ($(this).siblings('ul').length > 0) {
+                    $(this).siblings('ul').eq(0).slideToggle('slow');
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    .category-according li ul {
+        display: none
+    }
+
+    #category-accordion ul {
+        list-style: none;
+        padding-left: 21px;
+    }
+
+    .parent-category.active .touch-button.active::after {
+  content: '\e81b';
+  font-family: 'porto-icons';
+}
+.parent-category .touch-button::after {
+  content: "\e81c";
+  font-family: 'porto-icons';
+}
+
+.heading .heading-category {
+  padding: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #222529;
+  line-height: 1.4;
+  position: relative;
+  text-transform: uppercase;
+  padding-left: 21px;
+}
+.touch-button {
+  position: absolute;
+  right: 15px;
+}
+.category-according .parent-category {
+  position: relative;
+}
+.category-according .touch-button {
+  position: absolute;
+  right: 23px;
+}
+
+.parent-category a {
+  color: black;
+}
+</style>
